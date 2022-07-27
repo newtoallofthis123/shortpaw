@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <main>
+        <section class="section_div_1">
+            <h3 class="h3" style="text-align: center;">📃 Credits</h3>
+            <p class="lead text text_start">This project is made possible due to the support of the programming community. I work on these projects in my free time so any help and support would be appreciated. Feel free to get in touch on Discord.</p>
+            <p class="text text_start">Stuff I used to build ShortPaw: <span><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/html5.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/css3.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/javascript.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/jquery.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/flask.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/bootstrap.svg" /></span></p>
+            <p class="text text_start">Programs I used to build ShortPaw: <span><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/visualstudiocode.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/windowsterminal.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/firefox.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/googlechrome.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/discord.svg" /></span></p>
+            <p class="text text_start">Websites that I used: <span><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/simpleicons.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/googlefonts.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/github.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/heroku.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/youtube.svg" /><img class="tools_img" src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/freecodecamp.svg" /></span></p>
+            <p class="lead text text_start"><b>Special Thanks To: </b> <a href="https://www.pixilart.com/underdelta" class="link_" target="_blank">@UnderDelta</a> for favicon design,  <a href="https://cssbuttons.io" class="link_" target="_blank">cssbuttons.io</a> for the buttons</p>
+            <p class="lead text text_start"><b>3rd Party Stuff I used: </b><a href="https://quotable.io" class="link_" target="_blank">quotable.io</a>, <a href="https://useless-facts.sameerkumar.website" class="link_" target="_blank">useless-facts.sameerkumar.website</a>,  <a href="https://icons.getbootstrap.com/" class="link_" target="_blank">Bootstrap Icons</a>, <a href="https://pypi.org/project/PyQRCode/" class="link_" target="_blank">PyQRCode</a></p>
+            <h3 class="h3" style="text-align: center; padding-top: 1.2rem;">🐶 Thank You for Using ShortPaw! Woof Woof!</h3>
+        </section>
+    </main>
+    <script>
+        $(document).ready(function(){
+            function color(){
+                $.ajax({
+                    type: "GET",
+                    url: "/color",
+                    dataType: "json",
+                    success: function(response) {
+                        $("main").addClass(response.main)
+                        $("body").addClass(response.body)
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }
+            color();
+        })
+    </script>
+{% endblock %}

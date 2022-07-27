@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <main>
+        <section class="section_div_1">
+            <h3 class="h3 text_start" style="text-align: center;">Sorry! No such url shortened...</h3>
+            <div style="text-align: center;">
+                <img src="{{ url_for('static', filename='assets/svg/404.svg') }}" alt="404 svg" width="512" height="512">
+            </div>
+            <div style="text-align: center;" class="d-grid gap-2">
+                <button class="btn btn-danger"><a href="/" style="text-decoration: none; color: rgb(238, 231, 231); display: block;">Return Back!</a></button>
+            </div>
+        </section>
+    </main>
+    <script>
+        $(document).ready(function(){
+            function color(){
+                $.ajax({
+                    type: "GET",
+                    url: "/color",
+                    dataType: "json",
+                    success: function(response) {
+                        $("main").addClass(response.main)
+                        $("body").addClass(response.body)
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }
+            color()
+        })
+    </script>
+{% endblock %}

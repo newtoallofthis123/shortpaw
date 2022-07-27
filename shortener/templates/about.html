@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <main>
+        <section class="section_div_1">
+            <h3 class="h3" style="text-align: center;">🐶 ShortPaw: Woof Woof!</h3>
+            <p class="lead text text_start">ShortPaw is a awesome little url shortener written using flask on the backend. This a improvement on my previous project <a href="https://github.com/newtoallofthis123/NoobShort" class="link_ text lead">NoobShort</a>. I tried ajax for the first time. So, hope this feels very modern and well built. Some of my other projects are not very well styled hope you have a good time using ShortPaw. Feel free to reach out to me on <a href="https://discord.gg/zAUU4KzUdj" class="link_ lead">Discord</a>. Woof Woof!</p>
+            <h3 class="h3" style="text-align: center;">🤖 POST API</h3>
+            <textarea name="api_area" id="api_area" cols="30" rows="10">{{ code_content }}</textarea>
+        </section>
+    </main>
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.js"></script>
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/addon/edit/closebrackets.js"></script>
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/addon/comment/comment.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css">
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/python/python.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/theme/material.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/keymap/sublime.js"></script>
+    <script>
+        const codemirrorEditor = CodeMirror.fromTextArea(document.getElementById('api_area'), {
+            lineNumbers: true,
+            mode: "python",
+            theme: "material",
+            keymap: "sublime",
+            autoCloseBrackets: true,
+            matchTags: {bothTags: true},
+            autoCloseTags: true,
+            styleActiveLine: true,
+            smartIndent: true,
+            cursorBlinkRate: 0,
+            cursorHeight: 1,
+            viewportMargin: Infinity,
+            readOnly: true,
+        });
+        $(document).ready(function(){
+            function color(){
+                $.ajax({
+                    type: "GET",
+                    url: "/color",
+                    dataType: "json",
+                    success: function(response) {
+                        $("main").addClass(response.main)
+                        $("body").addClass(response.body)
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }
+            color()
+        })
+    </script>
+{% endblock %}

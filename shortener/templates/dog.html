@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <main>
+        <section class="section_div">
+            <p class="display-5 lead text">Meet the Dog Behind the WEB!</p>
+            <p class="lead text text_start">Did you know that dogs code? Yes...they are rumored to be the original creators of the Dog Wide Web. My dog says they are planning to conquer the Human Race by 2036. Stay Ready and GET A DOG! 🐶...Added bonus, You Get Cute Photos like this</p>
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{ url_for('static', filename='assets/photos/work.png') }}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>First I Code</h5>
+                            <p>Okay...I when I start to code, I look like this</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='assets/photos/tired.png') }}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Then I get Tired</h5>
+                            <p>Okay...It is natural to get tired after some coding! Right?</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='assets/photos/okay.png') }}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>What Do I do?</h5>
+                            <p>Okay...I do stuff very slow...I am lazy...What do I do?</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <p class="lead text text_start" style="padding-top: 12px;">Please help my dog conquer human race...get in <span class="badge bg-warning"><a href="/contact" class="btn_link lead">touch</a></span></p>
+        </section>
+    </main>
+    <script>
+        $(document).ready(function(){
+            function color(){
+                $.ajax({
+                    type: "GET",
+                    url: "/color",
+                    dataType: "json",
+                    success: function(response) {
+                        $("main").addClass(response.main)
+                        $("body").addClass(response.body)
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }
+            color()
+        })
+    </script>
+{% endblock %}

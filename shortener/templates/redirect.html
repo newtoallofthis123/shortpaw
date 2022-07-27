@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <main>
+        <in class="section_div" id="section_div">
+            <figure class="text-center">
+                <blockquote class="blockquote">
+                    <p>{{ ran_quote[0] }}</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    Quote by: <cite title="Source Title">{{ ran_quote[1] }}</cite>; powered by <a href="https://quotable.io" class="just_link text-primary">quotable.io</a>
+                </figcaption>
+            </figure>
+            <span><button class="btn btn-info" id="redirect_stop"><i class="bi bi-stop">Stop Timer </i></button><p class="lead" style="text-align: center;" id="timer"></p></span>
+            <p class="lead text">My inspired <span><a href="/dog" class="just_link" style="color: rgb(48, 76, 231);">Dog</a></span> is asking me to tell you that: </p>
+            <h3 class="lead h3 text" style="text-align: center; background: rgb(255, 255, 255); border-radius: 20px; padding: 12px;">Being Redirected To: <a href="{{ url_info['og_url'] }}" class="just_link" style="color: rgb(241, 28, 28);">{{ url_info['og_url'] }}</a></h3>
+            <h3 class="lead h3 text" style="text-align: center; background: rgb(255, 255, 255); border-radius: 20px; padding: 12px;">It has the hash of: <a href="/go/{{ url_info['hash'] }}" class="just_link" style="color: rgb(35, 243, 8);">{{ url_info['hash'] }}</a></h3>
+            <h3 class="lead h3 text" style="text-align: center; background: rgb(255, 255, 255); border-radius: 20px; padding: 12px;">It was created at: <a href="https://www.historynet.com/today-in-history" class="just_link" style="color: rgb(80, 10, 245);">{{ url_info['time'] }}</a></h3>
+            <div class="container">
+                <div class="row" style="margin-top: 1.2rem;">
+                    <button class="btn btn-info"><a href="/go/{{ url_info['hash'] }}" class="btn_link" style="font-size: 1.4rem;">Go To The Site <i class="bi bi-arrow-right"></i></a></button>
+                </div>
+                <div class="row" style="margin-top: 1.2rem;">
+                    <button class="btn btn-info" id="copy_btn"><i class="bi bi-clipboard" style="padding-left: 12px;"></i> Copy Url and Share it to your friends</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        $("#copy_btn").click(function(){
+            navigator.clipboard.writeText("https://shortpaw.herokuapp.com/go/{{ url_info['hash'] }}");
+            console.log("Copied to ClipBoard")
+        });
+        var count=15;
+        function timer(){
+            document.getElementById("timer").innerHTML =  count + " Seconds Left";
+            count -=1;
+            console.log("Redirecting User in " + count + "seconds")
+            if (count===0){
+                window.location.replace("/go/{{ url_info['hash'] }}");
+            };
+        };
+        var redirect_time = setInterval(timer, 1000);
+        $("#redirect_stop").click(function(){
+            clearInterval(redirect_time);
+            console.log("Redirect Stopped by User")
+        })
+        $(document).ready(function(){
+            function color(){
+                $.ajax({
+                    type: "GET",
+                    url: "/color",
+                    dataType: "json",
+                    success: function(response) {
+                        $("main").addClass(response.main)
+                        $("body").addClass(response.body)
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }
+            color()
+        });
+    </script>
+{% endblock %}
