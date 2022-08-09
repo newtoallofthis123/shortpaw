@@ -17,6 +17,7 @@ def short_url(hash):
     if url_info == "No Such Url":
         return redirect('/404')
     else:
+        visit_add(hash)
         return render_template('redirect.html', ran_quote=ran_quote(), url_info=url_info)
 
 @app.route('/qr', methods=["POST", "GET"])
@@ -58,11 +59,21 @@ def go(hash):
     if url_info == "No Such Url":
         return redirect('/404')
     else:
+        visit_add(hash)
         redirect_response = make_response(redirect(url_info.og_url, code=302))
         redirect_response.set_cookie("url", url_info.og_url)
         redirect_response.set_cookie("time", time_cal())
         return redirect_response
 
+@app.route('/info/<hash>')
+def info(hash):
+    url_info = get_og(hash)
+    if url_info == "No Such Url":
+        return redirect('/404')
+    else:
+        visit_add(hash)
+        return render_template('info.html', ran_quote=ran_quote(), url_info=url_info)
+    
 @app.route('/color', methods=["POST", "GET"])
 def color():
     colors = ran_color()

@@ -1,0 +1,130 @@
+    <div class="main_div">
+        {% if prev_url == "None" %}
+        <div style="text-align: center;">
+            <h3 class="h3" style="padding-bottom: 12px;">🔗 Make URL Shortening Private!</h3>
+        </div>
+        {% else %}
+        <div style="text-align: center;">
+            <h3 class="h3" style="padding-bottom: 12px;">👋🏻 Welcome! You Last Shortened <a href="/{{prev_url}}" class="just_link">/{{ prev_url }}</a></h3>
+        </div>
+        {% endif %}
+        <form>
+            <p class="lead">Enter the URL you want to shorten</p>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control home_url" aria-label="url" aria-describedby="basic-addon1" name="url" id="url" class="yt">
+            </div>
+            <p class="lead">Enter a Custom URL (Optional)</p>
+            <div class="input-group mb-3">
+                <span>
+                    <label class="switch">
+                        <input type="checkbox" name="custom_check" id="custom_check">
+                    </label>
+                </span>
+                <input type="text" class="form-control home_url" aria-label="url" aria-describedby="basic-addon1" name="custom_hash" id="custom_url">
+            </div>
+            <button type="button" id="shorten" style="margin-top: 1.2rem;">Shorten <i class="bi bi-arrow-right-circle-fill"></i></button>
+        </form>
+    </div>
+    <div id="url_display" style="padding-top: 1%; background-color: #fff; margin-top: 12px; margin-left: 10%; margin-right: 10%; border-radius: 24px;">
+        <h2 class="nav_title">Results</h2>
+        <span id=display></span>
+        <p class="lead" style="padding: 12px; text-align: center;">Warning: These will disappear on reload</p>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">QrCode</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="text-align: center;">
+                            <img src="{{ url_for('static',filename='assets/images/qr_code.svg') }}" alt="QrCode">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary"><a href="{{ url_for('static',filename='assets/images/qr_code.svg') }}" target="_blank" class="link" style="color: rgb(239, 248, 248);">Download</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app_name = "https://shortpaw.herokuapp.com"
+        $(document).ready(function(){
+            function color(){
+                $.ajax({
+                    type: "GET",
+                    url: "/color",
+                    dataType: "json",
+                    success: function(response) {
+                        $("main").addClass(response.main)
+                        $("body").addClass(response.body)
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }
+            function qr(hash){
+                $.ajax({
+                    type: "POST",
+                    url: "/qr",
+                    data: {"url": "https://shortpaw.herokuapp.com/go/" + hash},
+                    dataType: "json",
+                    success: function(response) {
+                        qr_stuff = response.stuff
+                        console.log(qr_stuff)
+                        return qr_stuff
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }
+            color()
+            $("#loading").hide()
+            $("#shorten").click(function(){
+                $("#loading").show()
+                $("#loading").hide(2000)
+                var url = $("#url").val()
+                console.log(url)
+                if ($("#custom_check").is(":checked")){
+                    var custom_check = "on"
+                    var custom_url = $("#custom_url").val()
+                    $.ajax({
+                        type: "POST",
+                        url: "/custom_create",
+                        data: {"url": url, "custom_url": custom_url},
+                        dataType: "json",
+                        success: function(response) {
+                            $("#url_display").append(
+                                "<p class='lead middle_text'>Shortened URL at time " + response.time + " is " + "<a href='/" + response.hash + "' id='short_link' class='short_link'>/" + response.hash + "</a>" + "<div>"+ qr(response.hash) + "</div></div>"
+                                );
+                        },
+                        error: function(err) {
+                            console.log(err);
+                        }
+                    });
+                }
+                else if ($("#custom_check").is(":not(:checked)")){
+                    var custom_check = "off"
+                    $.ajax({
+                        type: "POST",
+                        url: "/create",
+                        data: {"url": url},
+                        dataType: "json",
+                        success: function(response) {
+                            $("#url_display").append(
+                                "<p class='lead middle_text'>Shortened URL at time " + response.time + " is " + "<a href='/" + response.hash + "' id='short_link' class='short_link'>/" + response.hash + "</a>" + "<div>"+ qr(response.hash) + "</div></div>"
+                            );
+                        },
+                        error: function(err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            })
+        })
+    </script>

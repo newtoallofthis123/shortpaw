@@ -28,22 +28,20 @@ def time_cal():
     timeAnddate = (f'{current_t_f} {current_date}')
     return timeAnddate
 
-def add_reserve(url, time, hash):
-    """[summary]
-
-    Args:
-        url ([type]): [description]
-        time ([type]): [description]
-        hash (bool): [description]
-
-    Returns:
-        [type]: [description]
-    """
-    add_url = Bin(og_url=url, hash=hash, time=time)
+def visit_add(hash):
+    add_url = Bin.query.filter_by(hash=hash).first()
+    add_url.visits = int(add_url.visits) + 1
     db.session.add(add_url)
     db.session.commit()
     db.session.refresh(add_url)
-    short_url_info = {"og_url": url, "hash": hash, "time": time}
+
+def add_reserve(url, time, hash):
+    visits = 0
+    add_url = Bin(og_url=url, visits=visits, hash=hash, time=time)
+    db.session.add(add_url)
+    db.session.commit()
+    db.session.refresh(add_url)
+    short_url_info = {"og_url": url, "visits": visits, "hash": hash, "time": time}
     return short_url_info
 
 def creation_engine(url):
@@ -54,14 +52,6 @@ def creation_engine(url):
     return url_info
 
 def custom_hash(hash):
-    """[summary]
-
-    Args:
-        hash (bool): [description]
-
-    Returns:
-        [type]: [description]
-    """
     hash_check = Bin.query.filter_by(hash=hash).first()
     if hash_check:
         return hash_gen_engine()

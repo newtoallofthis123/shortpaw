@@ -1,183 +1,105 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <!-- <main>
-        <section class="section_div">
-            <h3 class="display-5" style="text-align: center; padding-bottom: 5px;">🐕‍🦺 Woof Woof!</h3>
 
-            <p class="lead">Enter the URL you want paw to shorten</p>
-            <form>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control home_url" aria-label="url" aria-describedby="basic-addon1" name="url" id="url" class="yt">
-                </div>
-                <p class="lead">Enter a Custom URL (Optional)</p>
-                <div class="input-group mb-3">
-                    <span>
-                        <label class="switch">
-                            <input type="checkbox" name="custom_check" id="custom_check">
-                        </label>
-                    </span>
-                    <input type="text" class="form-control home_url" aria-label="url" aria-describedby="basic-addon1" name="custom_hash" id="custom_url">
-                </div>
-                <button type="button" id="shorten" style="margin-top: 1.2rem;">Shorten <i class="bi bi-arrow-right-circle-fill"></i></button>
-            </form>
-            <div style="padding-top: 12px; text-align: center;" id="loading">
-                <div class="spinner-grow text-success" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <div class="spinner-grow text-warning" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <div class="spinner-grow text-danger" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-            <div id="url_display" style="padding-top: 3%;">
-                <span id=display></span>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">QrCode</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div style="text-align: center;">
-                                    <img src="{{ url_for('static',filename='assets/images/qr_code.svg') }}" alt="QrCode">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary"><a href="{{ url_for('static',filename='assets/images/qr_code.svg') }}" target="_blank" class="link" style="color: rgb(239, 248, 248);">Download</a></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main> -->
-    <div class="main_div">
-        <div style="text-align: center;">
-            <h3 class="h3" style="padding-bottom: 12px;">👋🏻 Welcome! You Last Shortened <a href="/{{prev_url}}" class="just_link">/{{ prev_url }}</a></h3>
-        </div>
-        <form>
-            <p class="lead">Enter the URL you want to shorten</p>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control home_url" aria-label="url" aria-describedby="basic-addon1" name="url" id="url" class="yt">
-            </div>
-            <p class="lead">Enter a Custom URL (Optional)</p>
-            <div class="input-group mb-3">
-                <span>
-                    <label class="switch">
-                        <input type="checkbox" name="custom_check" id="custom_check">
-                    </label>
-                </span>
-                <input type="text" class="form-control home_url" aria-label="url" aria-describedby="basic-addon1" name="custom_hash" id="custom_url">
-            </div>
-            <button type="button" id="shorten" style="margin-top: 1.2rem;">Shorten <i class="bi bi-arrow-right-circle-fill"></i></button>
-        </form>
-    </div>
-    <div id="url_display" style="padding-top: 1%; background-color: #fff; margin-top: 12px; margin-left: 10%; margin-right: 10%; border-radius: 24px;">
-        <h2 class="nav_title">Results</h2>
-        <span id=display></span>
-        <p class="lead" style="padding: 12px; text-align: center;">Warning: These will disappear on reload</p>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">QrCode</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div style="text-align: center;">
-                            <img src="{{ url_for('static',filename='assets/images/qr_code.svg') }}" alt="QrCode">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary"><a href="{{ url_for('static',filename='assets/images/qr_code.svg') }}" target="_blank" class="link" style="color: rgb(239, 248, 248);">Download</a></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="main_div">
+	<h2 class="main_title">🔗 Shorten and Forget!</h2>
+	<h2 class="main_text text_div">
+		{% if prev_url == "None" %}
+		ShortPaw: A Neat URL Shortener for the Modern User
+		{% else %}
+		You Last Shortened <a href="/{{ prev_url }}" class="link_" style="font-size: inherit;">/{{ prev_url }}</a>
+		{% endif %}
+	</h2>
+	<form class="url_div">
+		<div class="mb-3">
+			<p class="lead">Enter The URL You Want to Shorten</p>
+			<input type="text" class="form-control" aria-label="url" aria-describedby="basic-addon1" name="url" id="url" class="yt">
+		</div>
+		<div class="mb-3">
+			<div class="form-text">Enter a Custom URL: This is completely free and optional. Leave Empty for random</div>
+			<input type="text" class="form-control" aria-label="url" aria-describedby="basic-addon1" name="custom_hash" id="custom_url">
+		</div>
+		<button type="button" class="shorten_btn" id="submit_btn">
+			Shorten The URL <i class="bi bi-arrow-right"></i>
+		</button>
+	</form>
+	<div class="results_div">
+		<h2 class="display-4 title text_dark" style="text-align: center;">🔗 Results Are Yours!</h2>
+		<div id="results"></div>
+	</div>
+	<div class="modal fade" id="qrmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">QR Code for ShortPaw URL</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="qr"></div>
+					<p class="lead" style="text-align: center; padding-top: 0.8rem;">Powered By: <a href="https://goqr.me/api/" class="link_">QR Server</a></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Download QR Code</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		var app_name = "https://shortpaw.herokuapp.com"
+		function color(){
+			$.ajax({
+				type: "GET",
+				url: "/color",
+				dataType: "json",
+				success: function(response) {
+					$("body").addClass(response.body)
+				},
+				error: function(err) {
+					console.log(err);
+				}
+			});
+		}
+		color()
+		$(".results_div").toggle()
+		$("#submit_btn").click(function(){
+			if ($("#custom_url").val() == ""){
+				$.ajax({
+					type: "POST",
+					url: "/create",
+					data: {"url": $("#url").val()},
+					dataType: "json",
+					success: function(response) {
+						$(".results_div").css("display", "block");
+						$("#results").append("<p class='lead text_dark short_link'>This is your shortened URL: <a href='/" + response.hash + "' class='link_dark'>/" + response.hash + "</a><button class='btn qr_btn' data-bs-toggle='modal' data-bs-target='#qrmodal'><img src='{{ url_for('static',filename='assets/svg/qr-code.svg') }}' alt=''></button></p>");
+						$(".qr").html("<div style='text-align: center;'><img src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + app_name + "/go/" + response.hash +"' alt='QR Code'></div>")
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+			else{
+				$.ajax({
+					type: "POST",
+					url: "/custom_create",
+					data: {"url": $("#url").val(), "custom_url": $("#custom_url").val()},
+					dataType: "json",
+					success: function(response) {
+						$(".results_div").css("display", "block");
+						$("#results").append("<p class='lead text_dark short_link'>This is your shortened URL: <a href='/" + response.hash + "' class='link_dark'>/" + response.hash + "</a></p>");
+						$(".qr").html("<div style='text-align: center;'><img src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + app_name + "/go/" + response.hash +"' alt='QR Code'></div>")
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+		})
+	})
+</script>
 
-    <script>
-        const app_name = "https://shortpaw.herokuapp.com"
-        $(document).ready(function(){
-            function color(){
-                $.ajax({
-                    type: "GET",
-                    url: "/color",
-                    dataType: "json",
-                    success: function(response) {
-                        $("main").addClass(response.main)
-                        $("body").addClass(response.body)
-                    },
-                    error: function(err) {
-                        console.log(err);
-                    }
-                });
-            }
-            function qr(hash){
-                $.ajax({
-                    type: "POST",
-                    url: "/qr",
-                    data: {"url": "https://shortpaw.herokuapp.com/go/" + hash},
-                    dataType: "json",
-                    success: function(response) {
-                        qr_stuff = response.stuff
-                        console.log(qr_stuff)
-                        return qr_stuff
-                    },
-                    error: function(err) {
-                        console.log(err);
-                    }
-                });
-            }
-            color()
-            $("#loading").hide()
-            $("#shorten").click(function(){
-                $("#loading").show()
-                $("#loading").hide(2000)
-                var url = $("#url").val()
-                console.log(url)
-                if ($("#custom_check").is(":checked")){
-                    var custom_check = "on"
-                    var custom_url = $("#custom_url").val()
-                    $.ajax({
-                        type: "POST",
-                        url: "/custom_create",
-                        data: {"url": url, "custom_url": custom_url},
-                        dataType: "json",
-                        success: function(response) {
-                            $("#url_display").append(
-                                "<p class='lead middle_text'>Shortened URL at time " + response.time + " is " + "<a href='/" + response.hash + "' id='short_link' class='short_link'>/" + response.hash + "</a>" + "<div>"+ qr(response.hash) + "</div></div>"
-                                );
-                        },
-                        error: function(err) {
-                            console.log(err);
-                        }
-                    });
-                }
-                else if ($("#custom_check").is(":not(:checked)")){
-                    var custom_check = "off"
-                    $.ajax({
-                        type: "POST",
-                        url: "/create",
-                        data: {"url": url},
-                        dataType: "json",
-                        success: function(response) {
-                            $("#url_display").append(
-                                "<p class='lead middle_text'>Shortened URL at time " + response.time + " is " + "<a href='/" + response.hash + "' id='short_link' class='short_link'>/" + response.hash + "</a>" + "<div>"+ qr(response.hash) + "</div></div>"
-                            );
-                        },
-                        error: function(err) {
-                            console.log(err);
-                        }
-                    });
-                }
-            })
-        })
-    </script>
 {% endblock %}

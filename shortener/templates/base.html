@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="ShortPaw | The Simple URL Shortener">
+    <meta name="description" content="ShortPaw is a simple and open source URL Shortener with unlimited custom urls with no sign up robust API">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shortpaw.herokuapp.com/">
+    <meta property="og:title" content="ShortPaw | The Simple URL Shortener">
+    <meta property="og:description" content="ShortPaw is a simple and open source URL Shortener with unlimited custom urls with no sign up robust API">
+    <meta property="og:image" content="{{ url_for('static',filename='assets/icons/favicon.svg') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://shortpaw.herokuapp.com/">
+    <meta property="twitter:title" content="ShortPaw | The Simple URL Shortener">
+    <meta property="twitter:description" content="ShortPaw is a simple and open source URL Shortener with unlimited custom urls with no sign up robust API">
+    <meta property="twitter:image" content="{{ url_for('static',filename='assets/icons/favicon.svg') }}">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,38 +33,40 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
     <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/logo_new.png') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400&family=Josefin+Sans:wght@400&family=Open+Sans&family=PT+Sans&family=Poppins:wght@$00&family=Roboto+Mono&family=Roboto:wght@100;300;400&family=Supermercado+One&display=swap" rel="stylesheet">
-    <title>ShortPaw 🐕‍🦺: Woof Woof</title>
+    <title>ShortPaw | The URL Shortener Made By a Dog</title>
 </head>
-<nav class="navbar navbar-expand-lg navbar-light navStyle">
+<head>
+    <script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"noobscience",utcoffset:"6"}))};sessionStorage.setItem("_swa","1");</script>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark navStyle">
     <div class="container-fluid">
         <a class="navbar-brand" href="/"><span>
             <img src="{{ url_for('static', filename='assets/icons/logo_new.png') }}" width="32">
-        </span> <span class="navTitle">ShortPaw</span></a>
+        </span> <span class="navTitle">ShortPaw</span><span style="color: #f0f0f0; font-size: 18px; font-family: 'Pacifico', cursive; padding-left: 0.2rem;">.Inc</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-left: 5%;">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link link_nav hover_animation_underline" aria-current="page" href="/about">About</a>
+                    <a class="nav-link link_nav hover_animation_underline" aria-current="page" href="/about"><span class="nav_text">About</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link_nav hover_animation_underline" href="/credits">Credits</a>
+                    <a class="nav-link link_nav hover_animation_underline" href="/credits"><span class="nav_text">Credits</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link_nav hover_animation_underline" href="https://newtoallofthis123.github.io/tree/">Contact</a>
+                    <a class="nav-link link_nav hover_animation_underline" href="https://newtoallofthis123.github.io/tree/"><span class="nav_text">Contact</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link_nav hover_animation_underline" href="https://github.com/newtoallofthis123/shortpaw">GitHub</a>
+                    <a class="nav-link link_nav hover_animation_underline" href="https://github.com/newtoallofthis123/shortpaw"><span class="nav_text">GitHub</span></a>
                 </li>
             </ul>
             <div class="d-flex">
-                <div style="align-items: center;"><a href="https://github.com/newtoallofthis123/" class="lead text" style="text-decoration: none; color: rgb(17, 16, 16);"><img src="https://github.com/newtoallofthis123/Assets/raw/main/Image/noobscience.png" alt="noobscience avatar" width="44" height="44" style="border-radius: 50%;"> By NoobScience</a></div>
+                <div style="align-items: center;"><a href="https://github.com/newtoallofthis123/" class="lead text" style="text-decoration: none; color: #f0f0f0;"><img src="https://github.com/newtoallofthis123/Assets/raw/main/Image/noobscience.png" alt="noobscience avatar" width="44" height="44" style="border-radius: 50%;"> By NoobScience</a></div>
             </div>
         </div>
     </div>
@@ -55,17 +76,9 @@
 
     {% endblock %}
 </body>
-<script>
-    const ascii = `
-    ▄▄    ▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄ ▄▄▄▄▄▄▄ ▄▄    ▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄    ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ 
-    █  █  █ █       █       █  ▄    █       █       █   █       █  █  █ █       █       █  █       █  ▄    █       █       █
-    █   █▄█ █   ▄   █   ▄   █ █▄█   █  ▄▄▄▄▄█       █   █    ▄▄▄█   █▄█ █       █    ▄▄▄█  █▄▄▄▄   █ █ █   █▄▄▄▄   █▄▄▄▄   █
-    █       █  █ █  █  █ █  █       █ █▄▄▄▄▄█     ▄▄█   █   █▄▄▄█       █     ▄▄█   █▄▄▄    ▄▄▄▄█  █ █ █   █▄▄▄▄█  █▄▄▄▄█  █
-    █  ▄    █  █▄█  █  █▄█  █  ▄   ██▄▄▄▄▄  █    █  █   █    ▄▄▄█  ▄    █    █  █    ▄▄▄█  █ ▄▄▄▄▄▄█ █▄█   █ ▄▄▄▄▄▄█ ▄▄▄▄▄▄█
-    █ █ █   █       █       █ █▄█   █▄▄▄▄▄█ █    █▄▄█   █   █▄▄▄█ █ █   █    █▄▄█   █▄▄▄   █ █▄▄▄▄▄█       █ █▄▄▄▄▄█ █▄▄▄▄▄ 
-    █▄█  █▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄█▄▄▄▄▄▄▄█▄█  █▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█  █▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█    
-        `;
-    console.log(ascii);
-</script>
-<footer>
+<footer style="background-color: #21212190; padding: 1.8rem; opacity: 1;">
+    <div style="text-align: center;">
+        <h2 class="footer_title"><img src="{{ url_for('static',filename='assets/icons/logo_new.png') }}" class="footer_img" width="32" height="32" alt="Logo"> ShortPaw ©️: The URL Shortener Made in collaboration With a Dog!</h2>
+    </div>
+    <h2 class="footer_title">Made With <img src="{{ url_for('static',filename='assets/svg/heart-fill.svg') }}" alt="Love" style="padding-left: 5px; padding-right: 5px;"> and a lot of <img src="{{ url_for('static',filename='assets/svg/cup-hot-fill.svg') }}" alt="Cups Of Coffee" style="padding-left: 5px; padding-right: 5px;"> by 2022 NoobScience</h2>
 </footer>

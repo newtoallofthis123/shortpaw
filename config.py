@@ -11,7 +11,7 @@ class Config(object):
     POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
     POSTGRES_PORT = os.environ.get("POSTGRES_PORT", 5432)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    POSTGRES_DB = os.environ.get("POSTGRES_DB", "db_name")
+    POSTGRES_DB = os.environ.get("POSTGRES_DB", "sp_db")
     SQLALCHEMY_DATABASE_URI = (
         f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}"
         f"@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
@@ -21,7 +21,7 @@ class Config(object):
 class ProductionConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = (
-        ""
+    
     )
 
 
